@@ -1,2 +1,19 @@
+# Environments
 .env
+venv/
+env/
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Spotify API Cache
+.cache
+.cache-*
+
+# Data / Local Cache
+data/
+
+# OS
+.DS_Store
