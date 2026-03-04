@@ -1,0 +1,93 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "GetSongBPM API",
+        "version": "1.3",
+        "description": "API to retrieve metadata about artists and songs including BPM and Key."
+    },
+    "servers": [
+        {
+            "url": "https://api.getsong.co"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "in": "query",
+                "name": "api_key"
+            }
+        }
+    },
+    "security": [
+        {
+            "ApiKeyAuth": []
+        }
+    ],
+    "paths": {
+        "/search/": {
+            "get": {
+                "summary": "Search for songs or artists",
+                "operationId": "search",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "song",
+                                "artist",
+                                "both"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "lookup",
+                        "in": "query",
+                        "required": true,
+                        "description": "Song title or Artist name. For 'both', use format 'song:title artist:name'",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful search results"
+                    }
+                }
+            }
+        },
+        "/song/": {
+            "get": {
+                "summary": "Get details about a song",
+                "operationId": "getSong",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Song details including BPM and Key"
+                    }
+                }
+            }
+        }
+    }
+}
